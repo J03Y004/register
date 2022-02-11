@@ -17,41 +17,44 @@ let password = document.getElementById("password");
 let re_password = document.getElementById("re_password");
 
 // When the user starts to type something inside the password field
-password.onkeyup = function() {
+password.oninput = function() {
     // Validate capital letters
     let upperCaseLetters = /[A-Z]/g;
-    if (myInput.value.match(upperCaseLetters)) {
-        password.setCustomValidity('');
-    } else {
+    if (!password.value.match(upperCaseLetters)) {
         password.setCustomValidity("Must contain a capital letter");
+        password.reportValidity();
+        return;
     }
 
     // Validate numbers
     let numbers = /[0-9]/g;
-    if (myInput.value.match(numbers)) {
-        re_password.setCustomValidity('');
-    } else {
-        re_password.setCustomValidity("Must contain a number");
+    if (!password.value.match(numbers)) {
+        password.setCustomValidity("Must contain a number");
+        password.reportValidity();
+        return;
     }
 
     // Validate length
-    if (myInput.value.length >= 8) {
-        re_password.setCustomValidity('');
-    } else {
-        re_password.setCustomValidity("Minimum 8 character");
+    if (password.value.length < 8) {
+        password.setCustomValidity("Minimum 8 character");
+        password.reportValidity();
+        return;
     }
+
+    password.setCustomValidity("");
+    password.reportValidity();
+
+    confirmPassword();
 }
 
 function confirmPassword() {
-    if (password.value == re_password.value) {
-        re_password.setCustomValidity('');
-    } else {
+    if (password.value != re_password.value) {
         re_password.setCustomValidity("Passwords Don't Match");
+        re_password.reportValidity();
     }
 }
 
-password.onchange = confirmPassword;
-re_password.onkeyup = confirmPassword;
+re_password.oninput = confirmPassword;
 
 $("submit").click(function() {
     let name = $("name").val();
