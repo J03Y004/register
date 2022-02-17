@@ -9,44 +9,34 @@
 </head>
 <body>
     <?php
-        // nome di host
-        $host = "localhost";
-        // nome del database
-        $db = "users";
-        // username dell'utente in connessione
-        $user = "root";
-        // password dell'utente
-        $password = "";
+        $host = "localhost";        // nome di host
+        $db = "users";              // nome del database
+        $user = "root";             // username dell'utente in connessione
+        $password = "";             // password dell'utente
         
         /*
             blocco try/catch di gestione delle eccezioni
         */
         try {
-            // stringa di connessione al DBMS
-            $connessione = new PDO("mysql:host=$host;dbname=$db", $user, $password);
-            // imposto l'attributo per il report degli errori
-            $connessione->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // definizione delle variabili per la query
-            $contatto_cognome = $_POST['surname'];
+            $connessione = new PDO("mysql:host=$host;dbname=$db", $user, $password);        // stringa di connessione al DBMS
+            $connessione->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);          // imposto l'attributo per il report degli errori      
+            $contatto_cognome = $_POST['surname'];                                          // definizione delle variabili per la query
             $contatto_nome = $_POST['name'];
             $contatto_email = $_POST['email'];
             $contatto_password = $_POST['password'];
             // preparazione della query SQL
             $sql = $connessione->prepare("INSERT INTO FROM users (nome, cognome, email, password) VALUES (:contatto_nome, :contatto_cognome, :contatto_email, :contatto_password");
-            // bind dei parametri
+             // bind dei parametri
             $sql->bindParam(':contatto_cognome', $contatto_cognome, PDO::PARAM_STR, 7);
             $sql->bindParam(':contatto_nome', $contatto_nome, PDO::PARAM_STR, 7);
             $sql->bindParam(':contatto_email', $contatto_email, PDO::PARAM_STR, 7);
             $sql->bindParam(':contatto_password', $contatto_password, PDO::PARAM_STR, 7);
-            // esecuzione del prepared statement
-            $sql->execute();
-            // chiusura della connessione
-            $connessione = null;
+            $sql->execute();                                                                // esecuzione del prepared statement
+            $connessione = null;                                                            // chiusura della connessione
         }
         catch(PDOException $e)
         {
-            // notifica in caso di errore nel tentativo di connessione
-            echo $e->getMessage();
+            echo $e->getMessage();                                                          // notifica in caso di errore nel tentativo di connessione
         }
     ?>
 </body>
