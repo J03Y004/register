@@ -9,6 +9,21 @@
 </head>
 <body>
     <?php
+        // definizione delle variabili per la query
+        $contatto_nome = $_POST['name'];
+        $contatto_cognome = $_POST['surname'];                                         
+        $contatto_email = $_POST['email'];
+        $contatto_password = $_POST['password'];
+
+        $HEADER = [
+            'alg' => 'SHA256',
+            'type' => 'JWT'
+        ]
+
+        $PAYLOAD = [
+            'password' => $contatto_password
+        ]
+
         $host = "localhost";        // nome di host
         $db = "users";              // nome del database
         $user = "root";             // username dell'utente in connessione
@@ -20,10 +35,7 @@
         try {
             $connessione = new PDO("mysql:host=$host;dbname=$db", $user, $password);        // stringa di connessione al DBMS
             $connessione->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);          // imposto l'attributo per il report degli errori      
-            $contatto_cognome = $_POST['surname'];                                          // definizione delle variabili per la query
-            $contatto_nome = $_POST['name'];
-            $contatto_email = $_POST['email'];
-            $contatto_password = $_POST['password'];
+            
             // preparazione della query SQL
             $sql = $connessione->prepare("INSERT INTO FROM users (nome, cognome, email, password) VALUES (:contatto_nome, :contatto_cognome, :contatto_email, :contatto_password");
              // bind dei parametri
