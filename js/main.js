@@ -61,6 +61,4 @@ $("submit").click(function() {
     let surname = $("surname").val();
     let email = $("email").val();
     let password = $("password").val();
-
-    password = CryptoJS.SHA512(password);
 });
