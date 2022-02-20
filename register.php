@@ -18,11 +18,11 @@
         $HEADER = [
             'alg' => 'SHA256',
             'type' => 'JWT'
-        ]
+        ];
 
         $PAYLOAD = [
             'password' => $contatto_password
-        ]
+        ];
 
         $host = "localhost";        // nome di host
         $db = "users";              // nome del database
