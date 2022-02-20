@@ -33,7 +33,6 @@
             blocco try/catch di gestione delle eccezioni
         */
         try {
-<<<<<<< HEAD
             // stringa di connessione al DBMS
             $connessione = new PDO("mysql:host=$host;dbname=$db", $user, $password);
             // imposto l'attributo per il report degli errori
@@ -66,11 +65,6 @@
             $TIPORISPOSTA = 1;
             $RISPOSTA = $TOKEN;
 
-=======
-            $connessione = new PDO("mysql:host=$host;dbname=$db", $user, $password);        // stringa di connessione al DBMS
-            $connessione->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);          // imposto l'attributo per il report degli errori      
-            
->>>>>>> 6e255401cb7eb2547e763be3c7b5c7893432bf68
             // preparazione della query SQL
             $sql = $connessione->prepare("INSERT INTO FROM users (nome, cognome, email, password) VALUES (:contatto_nome, :contatto_cognome, :contatto_email, :contatto_password");
              // bind dei parametri
