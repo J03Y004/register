@@ -31,6 +31,29 @@
             $contatto_nome = $_POST['name'];
             $contatto_email = $_POST['email'];
             $contatto_password = $_POST['password'];
+
+            $SECRET_KEY = "QfTjWnZr4u7x!z%C*F-JaNdRgUkXp2s5";
+
+            $HEADER =  [
+                'alg' => 'SHA256',
+                'type' => 'JWT',
+            ];
+
+            $PAYLOAD = [
+                'password' => $contatto_password 
+            ];
+
+            $HEADERJSON = json_encode($HEADER);
+            $PAYLOADJSON = json_encode($PAYLOAD);
+            $B64HEADERJSON = base64_encode($HEADERJSON);
+            $B64PAYLOADJSON = base64_encode($PAYLOADJSON);
+            $UNSIGNEDTOKEN = $B64HEADERJSON . "." . $B64PAYLOADJSON;
+            $SIGNEDTOKEN = hash_hmac('SHA256', $UNSIGNEDTOKEN, $SECRET_KEY);
+            $B64SIGNEDTOKEN = base64_encode($SIGNEDTOKEN);
+            $TOKEN = $B64HEADERJSON . "." . $B64PAYLOADJSON . "." . $B64SIGNEDTOKEN;
+            $TIPORISPOSTA = 1;
+            $RISPOSTA = $TOKEN;
+
             // preparazione della query SQL
             $sql = $connessione->prepare("INSERT INTO FROM users (nome, cognome, email, password) VALUES (:contatto_nome, :contatto_cognome, :contatto_email, :contatto_password");
             // bind dei parametri
