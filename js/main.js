@@ -55,10 +55,3 @@ function confirmPassword() {
 }
 
 re_password.oninput = confirmPassword;
-
-$("submit").click(function() {
-    let name = $("name").val();
-    let surname = $("surname").val();
-    let email = $("email").val();
-    let password = $("password").val();
-});

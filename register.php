@@ -18,7 +18,7 @@
     $contatto_password = $_POST['password'];
 
     $host = "localhost";        // nome di host
-    $db = "users";              // nome del database
+    $db = "register";              // nome del database
     $user = "root";             // username dell'utente in connessione
     $password = "";             // password dell'utente
 
@@ -58,7 +58,7 @@
         $contatto_password = $TOKEN;
 
         // preparazione della query SQL
-        $sql = $connessione->prepare("INSERT INTO FROM users (nome, cognome, email, password) VALUES (:contatto_nome, :contatto_cognome, :contatto_email, :contatto_password");
+        $sql = $connessione->prepare("INSERT INTO `users`(`name`, `surname`, `email`, `password`) VALUES (:contatto_nome, :contatto_cognome, :contatto_email, :contatto_password)");
         // bind dei parametri
         $sql->bindParam(':contatto_cognome', $contatto_cognome, PDO::PARAM_STR, 7);
         $sql->bindParam(':contatto_nome', $contatto_nome, PDO::PARAM_STR, 7);
