@@ -52,6 +52,8 @@ function confirmPassword() {
         re_password.setCustomValidity("Passwords Don't Match");
         re_password.reportValidity();
     }
+    re_password.setCustomValidity("");
+    re_password.reportValidity();
 }
 
 re_password.oninput = confirmPassword;
