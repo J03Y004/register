@@ -36,6 +36,8 @@
         $contatto_email = $_POST['email'];
         $contatto_password = hash('SHA256',$_POST['password']);
 
+        $sql = $connessione->prepare("SELECT * FROM users WHERE contatto_email = :contatto_email AND password = :contatto_password");
+
         // preparazione della query SQL
         $sql = $connessione->prepare("INSERT INTO `users`(`name`, `surname`, `email`, `password`) VALUES (:contatto_nome, :contatto_cognome, :contatto_email, :contatto_password)");
         // bind dei parametri
@@ -50,9 +52,11 @@
                 <div class="container">
                     <div class="signup-content">
                         <h2 class="form-title">Registration Complete</h2>
-                        <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Login" onclick="signin.html"/>
-                        </div>
+                        <form method="POST" action="signin.html" id="signup-form" class="signup-form">
+                            <div class="form-group">
+                                <input type="submit" name="submit" id="submit" class="form-submit" value="Login"/>
+                            </div>
+                        </form>
                     </div>
                 </div>
               </section>';

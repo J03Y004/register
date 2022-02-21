@@ -12,8 +12,8 @@
 <body>
     <?php
     //PARAMETRI RICEVUTI DAL CLIENT
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $contatto_email = $_POST['contatto_email'];
+    $contatto_password = $_POST['password'];
 
     // nome di host
     $host = "localhost";
@@ -35,11 +35,11 @@
         $connessione->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // preparazione della query SQL
-        $sql = $connessione->prepare("SELECT * FROM utenti WHERE email = :contatto_email AND password = :contatto_password");
+        $sql = $connessione->prepare("SELECT * FROM users WHERE contatto_email = :contatto_email AND password = :contatto_password");
 
         // bind dei parametri
-        $sql->bindParam(':contatto_email', $email, PDO::PARAM_STR, 7);
-        $sql->bindParam(':contatto_password', $password, PDO::PARAM_STR, 7);
+        $sql->bindParam(':contatto_email', $contatto_email, PDO::PARAM_STR, 7);
+        $sql->bindParam(':contatto_password', $contatto_password, PDO::PARAM_STR, 7);
 
         // esecuzione del prepared statement
         $sql->execute();
@@ -53,7 +53,7 @@
             foreach ($result as $row) {
                 $nome = $row['nome'];
                 $cognome = $row['cognome'];
-                $emailutente = $row['email'];
+                $emailutente = $row['contatto_email'];
             }
 
             //INIZIO COSTRUIZIONE TOKEN 
@@ -70,7 +70,7 @@
             $PAYLOAD = [
                 'nome' => $nome,
                 'cognome' => $cognome,
-                'email' => $email
+                'contatto_email' => $contatto_email
             ];
 
             $HEADERJSON = json_encode($HEADER);
