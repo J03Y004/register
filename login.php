@@ -18,7 +18,7 @@
     // nome di host
     $host = "localhost";
     // nome del database
-    $db = "my_vincenzodavanzo";
+    $db = "register";
     // username dell'utente in connessione
     $user = "root";
     // password dell'utente
