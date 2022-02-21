@@ -51,7 +51,7 @@
                     <div class="signup-content">
                         <h2 class="form-title">Registration Complete</h2>
                         <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Login"/>
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Login" onclick="signin.html"/>
                         </div>
                     </div>
                 </div>
