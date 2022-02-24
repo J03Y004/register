@@ -12,8 +12,8 @@
 <body>
     <?php
     //PARAMETRI RICEVUTI DAL CLIENT
-    $contatto_email = $_POST['contatto_email'];
-    $contatto_password = $_POST['password'];
+    $contatto_email = $_POST['email'];
+    $contatto_password = hash('SHA256',$_POST['password']);
 
     // nome di host
     $host = "localhost";
@@ -35,7 +35,7 @@
         $connessione->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // preparazione della query SQL
-        $sql = $connessione->prepare("SELECT * FROM users WHERE contatto_email = :contatto_email AND password = :contatto_password");
+        $sql = $connessione->prepare("SELECT * FROM users WHERE email = :contatto_email AND password = :contatto_password");
 
         // bind dei parametri
         $sql->bindParam(':contatto_email', $contatto_email, PDO::PARAM_STR, 7);
@@ -51,9 +51,9 @@
 
             // ciclo dei risultati
             foreach ($result as $row) {
-                $nome = $row['nome'];
-                $cognome = $row['cognome'];
-                $emailutente = $row['contatto_email'];
+                $nome = $row['name'];
+                $cognome = $row['surname'];
+                $emailutente = $row['email'];
             }
 
             //INIZIO COSTRUIZIONE TOKEN 
