@@ -63,8 +63,7 @@
 
             $HEADER =  [
                 'alg' => 'SHA256',
-                'type' => 'JWT',
-                'ttl' => $scadenza
+                'type' => 'JWT'
             ];
 
             $PAYLOAD = [
@@ -102,7 +101,8 @@
         'risposta' => $RISPOSTA
     ];
     
-    echo (json_encode($RISP));
+    echo json_encode($RISP);
+    setcookie("AreaRiservata", $TOKEN);
     ?>
 </body>
 

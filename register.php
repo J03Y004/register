@@ -22,9 +22,6 @@
     $user = "root";             // username dell'utente in connessione
     $password = "";             // password dell'utente
 
-    /*
-            blocco try/catch di gestione delle eccezioni
-        */
     try {
         // stringa di connessione al DBMS
         $connessione = new PDO("mysql:host=$host;dbname=$db", $user, $password);
