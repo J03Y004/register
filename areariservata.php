@@ -1,0 +1,41 @@
+<?php
+    //PARAMETRO RICEVUTI DAL CLIENT
+    $JWT=$_POST['jwt'];
+
+    //divido il token in 3 parti sfruttando il . come separatore
+    $JWTSEPARATO = explode(".", $JWT);
+
+    //IL PRIMO ELEMENTO DEL JWTSEPARATO è header
+    $B64HEADERJSON = $JWTSEPARATO[0];
+
+    //IL PRIMO ELEMENTO DEL JWTSEPARATO è PAYLOAD
+    $B64PAYLOADJSON = $JWTSEPARATO[1];
+
+    //IL TERZO ELEMENTO DEL JWTSEPARATO è LA FIRMA
+    $B64FIRMARICEVUTA = $JWTSEPARATO[2];
+
+    //TRASFORMO LA FIRMA DA CODIFICA B64 IN CODIFICA ASCII
+    $FIRMARICEVUTA = base64_decode($B64FIRMARICEVUTA);
+
+    //DEVO GENERARE LA NUOVA IMPRONTA/FIRMA/DIGEST E CONFRONTARLA CON QUELLA RICEVUTA
+    $SECRET_KEY = "5AI-AS-2021-22";  //USO LA STESSA PASSWORD UTILIZZATA IN FASE DI CREAZIONE DEL TOKEN
+
+    $UNSIGNEDTOKEN = $B64HEADERJSON . "." . $B64PAYLOADJSON;
+        
+    $SIGNEDTOKEN = hash_hmac('SHA256', $UNSIGNEDTOKEN, $SECRET_KEY);
+
+    IF ($FIRMARICEVUTA==$SIGNEDTOKEN) {
+        $TIPORISPOSTA = 1;
+        $RISPOSTA = "TOKEN VALIDO";
+    }
+    else {
+        $TIPORISPOSTA = 0;
+        $RISPOSTA = "TOKEN NON VALIDO";
+    }
+    
+    $RISP = [
+                'tiporisposta' => $TIPORISPOSTA, 
+                'risposta' => $RISPOSTA 								
+            ];
+echo (json_encode($RISP));
+?>

@@ -101,7 +101,6 @@
         'risposta' => $RISPOSTA
     ];
     
-    echo json_encode($RISP);
     setcookie("AreaRiservata", $TOKEN);
     ?>
 </body>
