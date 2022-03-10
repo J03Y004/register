@@ -1,6 +1,6 @@
 <?php
     //PARAMETRO RICEVUTI DAL CLIENT
-    $JWT=$_POST['jwt'];
+    $JWT=$_COOKIE['tokenAreaRiservata'];
 
     //divido il token in 3 parti sfruttando il . come separatore
     $JWTSEPARATO = explode(".", $JWT);
