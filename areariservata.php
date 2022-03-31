@@ -24,18 +24,26 @@
         
     $SIGNEDTOKEN = hash_hmac('SHA256', $UNSIGNEDTOKEN, $SECRET_KEY);
 
-    IF ($FIRMARICEVUTA==$SIGNEDTOKEN) {
-        $TIPORISPOSTA = 1;
-        $RISPOSTA = "TOKEN VALIDO";
+    if ($FIRMARICEVUTA!=$SIGNEDTOKEN)  {
+        header("Location: login.html");
+        exit;
     }
-    else {
-        $TIPORISPOSTA = 0;
-        $RISPOSTA = "TOKEN NON VALIDO";
-    }
-    
-    $RISP = [
-                'tiporisposta' => $TIPORISPOSTA, 
-                'risposta' => $RISPOSTA 								
-            ];
-echo (json_encode($RISP));
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area riservata</title>
+</head>
+<body>
+    Benvenuto nell'area riservata:
+    <a href="logout.php">Log out</a>
+    <?php
+    $payload = json_decode(base64_decode($B64PAYLOADJSON));
+    echo $payload->nome . " " . $payload->cognome;
+    ?>
+</body>
+</html>

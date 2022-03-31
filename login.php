@@ -51,7 +51,7 @@ try {
 
         $HEADER =  [
             'alg' => 'SHA256',
-            'type' => 'JWT'
+            'typ' => 'JWT'
         ];
 
         $PAYLOAD = [
@@ -72,6 +72,19 @@ try {
 
         //FINE COSTRUZIONE token_get_all
     } else {
+        echo '<section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <h2 class="form-title">Wrong username or password!</h2>
+                    <form method="POST" action="login.html" id="signup-form" class="signup-form">
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Login"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+          </section>';
+          exit;
         $TOKEN = "";
     }
     // chiusura della connessione
@@ -81,6 +94,7 @@ try {
     $TOKEN = "";
 }
 
-setcookie("tockenAreaRiservata", $TOKEN, $scadenza, '/');
+setcookie("tokenAreaRiservata", $TOKEN, $scadenza, '/');
 header("Location:areariservata.php");
+
 ?>

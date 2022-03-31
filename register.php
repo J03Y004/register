@@ -33,23 +33,42 @@
         $contatto_email = $_POST['email'];
         $contatto_password = hash('SHA256',$_POST['password']);
 
-        $sql = $connessione->prepare("SELECT * FROM users WHERE contatto_email = :contatto_email AND password = :contatto_password");
+        $sql = $connessione->prepare("SELECT * FROM users WHERE email = :contatto_email");
+        $sql->bindParam(":contatto_email", $contatto_email, PDO::PARAM_STR);
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            echo '<section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <h2 class="form-title">User already exists!</h2>
+                    <form method="POST" action="signin.html" id="signup-form" class="signup-form">
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign In"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+          </section>';
+          exit;
+        }
 
         // preparazione della query SQL
         $sql = $connessione->prepare("INSERT INTO `users`(`name`, `surname`, `email`, `password`) VALUES (:contatto_nome, :contatto_cognome, :contatto_email, :contatto_password)");
         // bind dei parametri
-        $sql->bindParam(':contatto_cognome', $contatto_cognome, PDO::PARAM_STR, 7);
-        $sql->bindParam(':contatto_nome', $contatto_nome, PDO::PARAM_STR, 7);
-        $sql->bindParam(':contatto_email', $contatto_email, PDO::PARAM_STR, 7);
-        $sql->bindParam(':contatto_password', $contatto_password, PDO::PARAM_STR, 7);
+        $sql->bindParam(':contatto_cognome', $contatto_cognome, PDO::PARAM_STR);
+        $sql->bindParam(':contatto_nome', $contatto_nome, PDO::PARAM_STR);
+        $sql->bindParam(':contatto_email', $contatto_email, PDO::PARAM_STR);
+        $sql->bindParam(':contatto_password', $contatto_password, PDO::PARAM_STR);
         $sql->execute();                                                                // esecuzione del prepared statement
         $connessione = null;                                                            // chiusura della connessione
+        
 
         echo '<section class="signup">
                 <div class="container">
                     <div class="signup-content">
                         <h2 class="form-title">Registration Complete</h2>
-                        <form method="POST" action="signin.html" id="signup-form" class="signup-form">
+                        <form method="POST" action="login.html" id="signup-form" class="signup-form">
                             <div class="form-group">
                                 <input type="submit" name="submit" id="submit" class="form-submit" value="Login"/>
                             </div>

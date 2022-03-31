@@ -42,18 +42,17 @@ password.oninput = function() {
     }
 
     password.setCustomValidity("");
-    password.reportValidity();
-
     confirmPassword();
 }
 
 function confirmPassword() {
     if (password.value != re_password.value) {
-        re_password.setCustomValidity("Passwords Don't Match");
-        re_password.reportValidity();
+        this.setCustomValidity("Passwords Don't Match");
+        this.reportValidity();
+        return;
     }
-    re_password.setCustomValidity("");
-    re_password.reportValidity();
+
+    this.setCustomValidity("");
 }
 
 re_password.oninput = confirmPassword;
