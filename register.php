@@ -41,10 +41,10 @@
             echo '<section class="signup">
             <div class="container">
                 <div class="signup-content">
-                    <h2 class="form-title">User already exists!</h2>
-                    <form method="POST" action="signup.html" id="signup-form" class="signup-form">
+                    <h2 class="form-title">User already exists</h2>
+                    <form method="POST" action="login.html" id="signup-form" class="signup-form">
                         <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign In"/>
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Login"/>
                         </div>
                     </form>
                 </div>
