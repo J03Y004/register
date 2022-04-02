@@ -72,18 +72,30 @@ try {
 
         //FINE COSTRUZIONE token_get_all
     } else {
-        echo '<section class="signup">
-            <div class="container">
-                <div class="signup-content">
-                    <h2 class="form-title">Wrong username or password!</h2>
-                    <form method="POST" action="login.html" id="signup-form" class="signup-form">
-                        <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Login"/>
-                        </div>
-                    </form>
+        echo '
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
+        <body>
+            <section class="signup">
+                <div class="container">
+                    <div class="signup-content">
+                        <h2 class="form-title">Wrong username or password!</h2>
+                        <form method="POST" action="login.html" id="signup-form" class="signup-form">
+                            <div class="form-group">
+                                <input type="submit" name="submit" id="submit" class="form-submit" value="Login"/>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-          </section>';
+              </section>
+        </body>
+        </html>';
           exit;
         $TOKEN = "";
     }
