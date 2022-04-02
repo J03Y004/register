@@ -1,5 +1,8 @@
 (function($) {
 
+    //This function turns the password visible/not visible by clicking on the 
+    //eye icon in the password field. At the click of the icon the input field's type is
+    //set to "text" instead of "password" or viceversa.
     $(".toggle-password").click(function() {
 
         $(this).toggleClass("zmdi-eye zmdi-eye-off");
@@ -21,7 +24,7 @@ password.oninput = function() {
     // Validate capital letters
     let upperCaseLetters = /[A-Z]/g;
     if (!password.value.match(upperCaseLetters)) {
-        password.setCustomValidity("Must contain a capital letter");
+        password.setCustomValidity("Must contain a capital letter");    //shows an error message
         password.reportValidity();
         return;
     }
@@ -45,6 +48,7 @@ password.oninput = function() {
     confirmPassword();
 }
 
+//checks if the repeat-password field contains the same string of the password field
 function confirmPassword() {
     if (password.value != re_password.value) {
         this.setCustomValidity("Passwords Don't Match");
